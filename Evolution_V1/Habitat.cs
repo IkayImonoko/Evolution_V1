@@ -1,33 +1,24 @@
-﻿using System.Drawing;
+﻿using OpenCvSharp;
 
 namespace Evolution_V1;
 
 public class Habitat
 {
-    private int _length = 50;
+    public static int Length = 0;
     public Point TopLeft;
     public string Name;
-    public ConsoleColor Color;
+    public Scalar Color;
 
-    public Habitat(string name, ConsoleColor color, Point topLeft)
+    public Habitat(string name, Scalar color, Point topLeft)
     {
         Name = name;
         Color = color;
         TopLeft = topLeft;
     }
 
-    public void Draw()
+    public void Draw(Mat mainField)
     {
-        for (int i = TopLeft.X; i < TopLeft.X + _length; i++)
-        {
-            for (int j = TopLeft.Y; j < TopLeft.Y + _length; j++)
-            {
-                Console.SetCursorPosition(i,j);
-                Console.BackgroundColor = Color;
-                Console.Write("1");
-            }
-        }
-
-        Console.BackgroundColor = ConsoleColor.Black;
+       var habitatPosition = new Rect(TopLeft.X, TopLeft.Y, Length, Length);
+       mainField[habitatPosition].SetTo(Color);
     }
 }
