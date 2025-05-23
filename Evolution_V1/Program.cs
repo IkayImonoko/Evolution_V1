@@ -4,7 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Evolution evolution = new Evolution();
+        Evolution evolution = new Evolution(5);
         evolution.Run();
     }
     
