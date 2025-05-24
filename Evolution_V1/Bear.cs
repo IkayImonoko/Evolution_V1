@@ -64,12 +64,20 @@ internal class Bear
 
             while (!CanMove(newCoordinates))
             {
+                newCoordinates.X = 0;
+                newCoordinates.Y = 0;
                 stepDirection = random.Next(0, 9);
+                step = new Step(Coordinates, stepLength);
                 step.MakeStep((Direction)stepDirection);
                 newCoordinates = step.Coordinates;
             }
 
-            Coordinates = newCoordinates;
+            if (newCoordinates.X >=0 && newCoordinates.Y < 800)
+            {
+                Coordinates.X = newCoordinates.X;
+                Coordinates.Y = newCoordinates.Y;
+            }
+            
         }
     }
 
