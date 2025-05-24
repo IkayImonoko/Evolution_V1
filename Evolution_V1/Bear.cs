@@ -10,23 +10,31 @@ internal class Bear
     public Point Coordinates;
     public int ChildsAmount { get; set; }
 
-    public Bear()
+    public Bear(Scalar colorA = default, Scalar colorB = default)
     {
-        ChildsAmount = 10;
-        Random random = new Random();
         
+        Random random = new Random();
+        ChildsAmount = random.Next(0, 11);;
         Lifetime = random.Next(365 * 10, 365 * 50);
-        //_color = new Scalar(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
-        _color = Scalar.Black;
+        int mutation = random.Next(1, 11);
+        if (mutation == 1)
+        {
+            _color = new Scalar(random.Next(0, 256), random.Next(0, 256), random.Next(0, 256));
+        }
+        else
+        {
+            _color = new Scalar((colorA.Val0 + colorB.Val0) / 2, (colorA.Val1 + colorB.Val1) / 2, (colorA.Val2 + colorB.Val2) / 2);
+        }
+        
         Coordinates.X = random.Next(0, 800);//TODO Magic number - size of Main field
         Coordinates.Y = random.Next(0, 800);//
     }
     
-    public Bear(Scalar colorA, Scalar colorB)
-    {
-        ChildsAmount = 10;
-        _color = new Scalar((colorA.Val0 + colorB.Val0)/(double)2, (colorA.Val1 + colorB.Val1)/(double)2, (colorA.Val2 + colorB.Val2)/(double)2);
-    }
+    // public Bear(Scalar colorA, Scalar colorB)
+    // {
+    //     ChildsAmount = 10;
+    //     _color = new Scalar((colorA.Val0 + colorB.Val0)/(double)2, (colorA.Val1 + colorB.Val1)/(double)2, (colorA.Val2 + colorB.Val2)/(double)2);
+    // }
 
     public static Bear MakeChild(Scalar colorA, Scalar colorB)
     {
@@ -47,7 +55,7 @@ internal class Bear
         {
             Lifetime--;
             Random random = new Random();
-            Point newCoordinates = default;
+            Point newCoordinates = new Point(0, 0);
             int stepDirection = random.Next(0, 9);
             int stepLength = random.Next(0, 9);
             var step = new Step(Coordinates, stepLength);
