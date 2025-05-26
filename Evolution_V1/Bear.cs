@@ -5,25 +5,25 @@ namespace Evolution_V1;
 
 internal class Bear
 {
-    Scalar _color;
+    public Scalar Color { get; }
     public int Lifetime; //= 365 * 20;//days
     public Point Coordinates;
-    public int ChildsAmount { get; set; }
+    public int TimeToNextChildLeft { get; set; }
 
     public Bear(Scalar colorA = default, Scalar colorB = default)
     {
         
         Random random = new Random();
-        ChildsAmount = random.Next(0, 11);;
-        Lifetime = random.Next(365 * 10, 365 * 50);
+        TimeToNextChildLeft = 730;
+        Lifetime = random.Next(365 * 5, 365 * 10);
         int mutation = random.Next(1, 11);
         if (mutation == 1)
         {
-            _color = new Scalar(random.Next(0, 256), random.Next(0, 256), random.Next(0, 256));
+            Color = new Scalar(random.Next(0, 256), random.Next(0, 256), random.Next(0, 256));
         }
         else
         {
-            _color = new Scalar((colorA.Val0 + colorB.Val0) / 2, (colorA.Val1 + colorB.Val1) / 2, (colorA.Val2 + colorB.Val2) / 2);
+            Color = new Scalar((colorA.Val0 + colorB.Val0) / 2, (colorA.Val1 + colorB.Val1) / 2, (colorA.Val2 + colorB.Val2) / 2);
         }
         
         Coordinates.X = random.Next(0, 800);//TODO Magic number - size of Main field
@@ -43,7 +43,7 @@ internal class Bear
 
     public void Draw(Mat mainField)
     {
-        mainField.Circle(Coordinates.X, Coordinates.Y, 3, _color, -1);
+        mainField.Circle(Coordinates.X, Coordinates.Y, 3, Color, -1);
         mainField.Circle(Coordinates.X, Coordinates.Y, 3, Scalar.Black, 1);
     }
 
@@ -51,6 +51,10 @@ internal class Bear
     {
         // Console.Clear();
         // Console.WriteLine(_lifetime);
+        if (TimeToNextChildLeft > 0)
+        {
+            TimeToNextChildLeft--;
+        }
         if (Lifetime > 0)
         {
             Lifetime--;
@@ -87,7 +91,7 @@ internal class Bear
         return coordinates is { X: >= 0 and < 800, Y: >= 0 and < 800 };
     }
     
-    private static double GetDistanceBetweenBears(Bear bear1, Bear bear2)
+    public static double GetDistanceBetweenBears(Bear bear1, Bear bear2)
     {
         double deltaX = bear1.Coordinates.X - bear2.Coordinates.X;
         double deltaY = bear1.Coordinates.Y - bear2.Coordinates.Y;

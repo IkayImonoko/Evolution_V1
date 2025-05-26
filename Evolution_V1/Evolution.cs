@@ -38,17 +38,44 @@ internal class Evolution
             _bears.RemoveAll(b => b.Lifetime == 0);
             _bears.ForEach(b => b.Draw(mainField));
             _bears.ForEach(b => b.Move());
- 
+            CheckCollisionsAndSpawnBears();
+            Console.Clear();
+            Console.WriteLine(_bears.Count);
             Cv2.ImShow("Evolution", mainField);
 
             key = Cv2.WaitKey(100);
         }
+        
+    }
     
-        
-        
-        // Cv2.WaitKey(0);
-        // Cv2.DestroyAllWindows();
-        // Console.ReadKey();
-        
+    private void CheckCollisionsAndSpawnBears()
+    {
+        for (int i = 0; i < _bears.Count - 1; i++)
+        {
+            for (int j = i + 1; j < _bears.Count; j++)
+            {
+                Bear bear1 = _bears[i];
+                Bear bear2 = _bears[j];
+                double distance = Bear.GetDistanceBetweenBears(bear1, bear2);
+                if (distance < 6 && 
+                    bear1.TimeToNextChildLeft == 0 && 
+                    bear2.TimeToNextChildLeft == 0)
+                {
+                    bear1.TimeToNextChildLeft = 730;
+                    bear2.TimeToNextChildLeft = 730;
+                    Bear newBear = Bear.MakeChild(bear1.Color, bear2.Color);
+                    Random random = new Random();
+                    newBear.Coordinates = new Point(
+                        bear1.Coordinates.X + random.Next(-20, 21),
+                        bear1.Coordinates.Y + random.Next(-20, 21)
+                    );
+                    if (newBear.Coordinates is { X: >= 0 and < 800, Y: >= 0 and < 800 })
+                    {
+                        _bears.Add(newBear);
+                        break;
+                    }
+                }
+            }
+        }
     }
 }
