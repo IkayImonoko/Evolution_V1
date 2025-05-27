@@ -5,10 +5,10 @@ namespace Evolution_V1;
 
 internal class Bear
 {
-    public Scalar Color { get; }
-    public int Lifetime; //= 365 * 20;//days
-    public Point Coordinates;
-    public int TimeToNextChildLeft { get; set; }
+    private readonly Scalar _color;
+    public int Lifetime { get; private set; } //= 365 * 20;//days
+    public Point Coordinates { get; private set; }
+    public int TimeToNextChildLeft { get; private set; }
 
     public Bear(Scalar colorA = default, Scalar colorB = default)
     {
@@ -19,38 +19,40 @@ internal class Bear
         int mutation = random.Next(1, 11);
         if (mutation == 1)
         {
-            Color = new Scalar(random.Next(0, 256), random.Next(0, 256), random.Next(0, 256));
+            _color = new Scalar(random.Next(0, 256), random.Next(0, 256), random.Next(0, 256));
         }
         else
         {
-            Color = new Scalar((colorA.Val0 + colorB.Val0) / 2, (colorA.Val1 + colorB.Val1) / 2, (colorA.Val2 + colorB.Val2) / 2);
+            _color = new Scalar((colorA.Val0 + colorB.Val0) / 2, (colorA.Val1 + colorB.Val1) / 2, (colorA.Val2 + colorB.Val2) / 2);
         }
+
+        Coordinates = new Point(random.Next(0, 800), random.Next(0, 800));
         
-        Coordinates.X = random.Next(0, 800);//TODO Magic number - size of Main field
-        Coordinates.Y = random.Next(0, 800);//
     }
     
-    // public Bear(Scalar colorA, Scalar colorB)
-    // {
-    //     ChildsAmount = 10;
-    //     _color = new Scalar((colorA.Val0 + colorB.Val0)/(double)2, (colorA.Val1 + colorB.Val1)/(double)2, (colorA.Val2 + colorB.Val2)/(double)2);
-    // }
 
-    public static Bear MakeChild(Scalar colorA, Scalar colorB)
+    public static Bear? MakeChild(Bear parrentA, Bear parrentB)
     {
-        return new Bear(colorA, colorB);
+        Bear newBear = new Bear(parrentA._color, parrentB._color);
+        Random random = new Random();
+        newBear.Coordinates = new Point(
+            parrentA.Coordinates.X + random.Next(-20, 21),
+            parrentA.Coordinates.Y + random.Next(-20, 21)
+        );
+        parrentA.TimeToNextChildLeft = 730;
+        parrentB.TimeToNextChildLeft = 730;
+
+        return Evolution.CanMoveTo(newBear.Coordinates) ? newBear : null;
     }
 
     public void Draw(Mat mainField)
     {
-        mainField.Circle(Coordinates.X, Coordinates.Y, 3, Color, -1);
+        mainField.Circle(Coordinates.X, Coordinates.Y, 3, _color, -1);
         mainField.Circle(Coordinates.X, Coordinates.Y, 3, Scalar.Black, 1);
     }
 
     public void Move()
     {
-        // Console.Clear();
-        // Console.WriteLine(_lifetime);
         if (TimeToNextChildLeft > 0)
         {
             TimeToNextChildLeft--;
@@ -66,35 +68,20 @@ internal class Bear
             step.MakeStep((Direction)stepDirection);
             newCoordinates = step.Coordinates;
 
-            while (!CanMove(newCoordinates))
+            while (!Evolution.CanMoveTo(newCoordinates))
             {
-                // newCoordinates.X = 0;
-                // newCoordinates.Y = 0;
                 stepDirection = random.Next(0, 9);
                 step = new Step(Coordinates, stepLength);
                 step.MakeStep((Direction)stepDirection);
                 newCoordinates = step.Coordinates;
             }
-
-            // if (newCoordinates.X >=0 && newCoordinates.Y < 800)
-            // {
-            //     Coordinates.X = newCoordinates.X;
-            //     Coordinates.Y = newCoordinates.Y;
-            // }
+            
             Coordinates = newCoordinates;
             
         }
     }
 
-    private bool CanMove(Point coordinates)
-    {
-        return coordinates is { X: >= 0 and < 800, Y: >= 0 and < 800 };
-    }
+
     
-    public static double GetDistanceBetweenBears(Bear bear1, Bear bear2)
-    {
-        double deltaX = bear1.Coordinates.X - bear2.Coordinates.X;
-        double deltaY = bear1.Coordinates.Y - bear2.Coordinates.Y;
-        return Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
-    }
+
 }

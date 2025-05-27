@@ -8,16 +8,26 @@ internal class Evolution
     private static int _habitatLength;
     private Habitat[] _habitats;
 
+    public static bool CanMoveTo(Point newCoordinates)
+    {
+        return newCoordinates is { X: >= 0 and < 800, Y: >= 0 and < 800 };
+    }
+    public static double GetDistanceBetweenBears(Bear bear1, Bear bear2)
+    {
+        double deltaX = bear1.Coordinates.X - bear2.Coordinates.X;
+        double deltaY = bear1.Coordinates.Y - bear2.Coordinates.Y;
+        return Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
+    }
     public Evolution(int bearsAmount)
     {
         _habitatLength = 400;
-        _habitats = new Habitat[4]
-        {
+        _habitats =
+        [
             new Habitat("Ice", Scalar.White, new Point(0, 0)),
             new Habitat("Forest", Scalar.Green, new Point(_habitatLength, 0)),
             new Habitat("Desert", Scalar.Yellow, new Point(0, _habitatLength)),
             new Habitat("Sea", Scalar.Blue, new Point(_habitatLength, _habitatLength))
-        };
+        ];
         _bears = new List<Bear>(bearsAmount);
         _bears.AddRange(Enumerable.Range(0, bearsAmount).Select(_ => new Bear()));
     }
@@ -56,24 +66,19 @@ internal class Evolution
             {
                 Bear bear1 = _bears[i];
                 Bear bear2 = _bears[j];
-                double distance = Bear.GetDistanceBetweenBears(bear1, bear2);
+                double distance = GetDistanceBetweenBears(bear1, bear2);
                 if (distance < 6 && 
                     bear1.TimeToNextChildLeft == 0 && 
                     bear2.TimeToNextChildLeft == 0)
                 {
-                    bear1.TimeToNextChildLeft = 730;
-                    bear2.TimeToNextChildLeft = 730;
-                    Bear newBear = Bear.MakeChild(bear1.Color, bear2.Color);
-                    Random random = new Random();
-                    newBear.Coordinates = new Point(
-                        bear1.Coordinates.X + random.Next(-20, 21),
-                        bear1.Coordinates.Y + random.Next(-20, 21)
-                    );
-                    if (newBear.Coordinates is { X: >= 0 and < 800, Y: >= 0 and < 800 })
+
+                    var newBear = Bear.MakeChild(bear1, bear2);
+                    if (newBear != null)
                     {
-                        _bears.Add(newBear);
-                        break;
+                        _bears.Add(newBear); 
                     }
+                    break;
+                   
                 }
             }
         }
