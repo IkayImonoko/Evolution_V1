@@ -6,7 +6,7 @@ namespace Evolution_V1;
 internal class Bear
 {
     private readonly Scalar _color;
-    public int Lifetime { get; private set; } //= 365 * 20;//days
+    public int Lifetime { get; private set; }
     public Point Coordinates { get; private set; }
     public int TimeToNextChildLeft { get; private set; }
 
