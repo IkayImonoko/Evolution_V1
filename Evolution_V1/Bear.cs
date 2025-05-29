@@ -9,6 +9,7 @@ internal class Bear
     public int Lifetime { get; private set; }
     public Point Coordinates { get; private set; }
     public int TimeToNextChildLeft { get; private set; }
+    private static int _radius = 3;
 
     public Bear(Scalar colorA = default, Scalar colorB = default)
     {
@@ -47,8 +48,8 @@ internal class Bear
 
     public void Draw(Mat mainField)
     {
-        mainField.Circle(Coordinates.X, Coordinates.Y, 3, _color, -1);
-        mainField.Circle(Coordinates.X, Coordinates.Y, 3, Scalar.Black, 1);
+        mainField.Circle(Coordinates.X, Coordinates.Y, _radius, _color, -1);
+        mainField.Circle(Coordinates.X, Coordinates.Y, _radius, Scalar.Black, 1);
     }
 
     public void Move()
