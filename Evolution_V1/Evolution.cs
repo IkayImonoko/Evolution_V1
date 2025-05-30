@@ -66,7 +66,7 @@ internal class Evolution
             {
                 Bear bear1 = _bears[i];
                 Bear bear2 = _bears[j];
-                double distance = GetDistanceBetweenBears(bear1, bear2);
+                var distance = GetDistanceBetweenBears(bear1, bear2);
                 if (distance < 6 && 
                     bear1.TimeToNextChildLeft == 0 && 
                     bear2.TimeToNextChildLeft == 0)
