@@ -34,8 +34,8 @@ internal class Bear
 
     public static Bear? MakeChild(Bear parrentA, Bear parrentB)
     {
-        Bear newBear = new Bear(parrentA._color, parrentB._color);
-        Random random = new Random();
+        var newBear = new Bear(parrentA._color, parrentB._color);
+        var random = new Random();
         newBear.Coordinates = new Point(
             parrentA.Coordinates.X + random.Next(-20, 21),
             parrentA.Coordinates.Y + random.Next(-20, 21)
