@@ -17,7 +17,7 @@ internal class Bear
         Random random = new Random();
         TimeToNextChildLeft = 730;
         Lifetime = random.Next(365 * 5, 365 * 10);
-        int mutation = random.Next(1, 11);
+        var mutation = random.Next(1, 11);
         if (mutation == 1)
         {
             _color = new Scalar(random.Next(0, 256), random.Next(0, 256), random.Next(0, 256));
