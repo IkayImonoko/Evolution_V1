@@ -1,4 +1,4 @@
-﻿namespace Evolution_V1;
+﻿namespace BearsMutabilitySimulatorLib;
 
 public enum Direction
 {
