@@ -1,0 +1,6 @@
+@BearsMutabilitySimulatorAPI_HostAddress = http://localhost:5274
+
+GET {{BearsMutabilitySimulatorAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
