@@ -15,11 +15,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-int bearsAmount = 50;
-int habitatLenght = 400;
+var bearsAmount = 50;
+var habitatLenght = 400;
 var coordinateSpace = new CoordinateSpace(new Point(0,0), habitatLenght * 2, habitatLenght * 2);
 
-List<Bear> bears = new List<Bear>(bearsAmount);
+var bears = new List<Bear>(bearsAmount);
 bears.AddRange(Enumerable.Range(0, bearsAmount).Select(_ => new Bear(coordinateSpace.BottomRight)));
 
 app.MapGet("/bears", () =>
