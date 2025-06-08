@@ -14,6 +14,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 var bearsAmount = 50;
 var habitatLenght = 400;
