@@ -20,8 +20,21 @@ var bearsAmount = 50;
 var habitatLenght = 400;
 var coordinateSpace = new CoordinateSpace(new Point(0,0), habitatLenght * 2, habitatLenght * 2);
 
+Habitat[] habitats =
+[
+    new Habitat("Ice", Scalar.White, new Point(0, 0), habitatLenght),
+    new Habitat("Forest", Scalar.Green, new Point(habitatLenght, 0),habitatLenght),
+    new Habitat("Desert", Scalar.Yellow, new Point(0, habitatLenght),habitatLenght),
+    new Habitat("Sea", Scalar.Blue, new Point(habitatLenght, habitatLenght),habitatLenght)
+];
+
 var bears = new List<Bear>(bearsAmount);
 bears.AddRange(Enumerable.Range(0, bearsAmount).Select(_ => new Bear(coordinateSpace.BottomRight)));
+var bearController = new BearsController(coordinateSpace, bears);
+var timer = new System.Timers.Timer(1000); 
+timer.Elapsed += (sender, e) => bearController.RunOneIteration();
+timer.AutoReset = true; 
+timer.Start();
 
 app.MapGet("/bears", () =>
 {
@@ -34,6 +47,18 @@ app.MapGet("/bears", () =>
         TimeToNextChildLeft = b.TimeToNextChildLeft
     }).ToArray();
     return bearsData;
+});
+
+app.MapGet("/habitats", () =>
+{
+    var habitatsData = habitats.Select(h => new HabitatsData()
+    {
+        Color = [h.Color.Val0, h.Color.Val1, h.Color.Val2],
+        Name = h.Name,
+        TopLeft = [h.TopLeft.X, h.TopLeft.Y],
+        Length = h.Length
+    }).ToArray();
+    return habitatsData;
 });
     
 
