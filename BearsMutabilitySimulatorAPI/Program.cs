@@ -60,6 +60,12 @@ app.MapGet("/habitats", () =>
     }).ToArray();
     return habitatsData;
 });
-    
+
+app.MapGet("/coordinatespace", () => new CoordinateSpaceData()
+{
+    TopLeft = [coordinateSpace.TopLeft.X, coordinateSpace.TopLeft.Y],
+    Width = coordinateSpace.Width,
+    Height = coordinateSpace.Height
+});
 
 app.Run();

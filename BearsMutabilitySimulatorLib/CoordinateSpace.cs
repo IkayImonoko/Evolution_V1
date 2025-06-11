@@ -4,7 +4,7 @@ namespace BearsMutabilitySimulatorLib;
 
 public class CoordinateSpace
 {
-    private Point _topLeft;
+    public Point TopLeft { get; }
     public int Width { get; }
     public int Height { get; }
 
@@ -12,19 +12,19 @@ public class CoordinateSpace
     {
         get
         {
-            return new Point(_topLeft.X + Width - 1, _topLeft.Y + Height - 1);
+            return new Point(TopLeft.X + Width - 1, TopLeft.Y + Height - 1);
         }
     }
 
     public CoordinateSpace(Point topLeft, int width, int height)
     {
-        _topLeft = topLeft;
+        TopLeft = topLeft;
         Width = width;
         Height = height;
     }
 
     public bool CanMoveTo(Point newPosition)
     {
-        return newPosition.X >= _topLeft.X && newPosition.X <= Width - 1 && newPosition.Y >= _topLeft.Y && newPosition.Y <= Height - 1;
+        return newPosition.X >= TopLeft.X && newPosition.X <= Width - 1 && newPosition.Y >= TopLeft.Y && newPosition.Y <= Height - 1;
     }
 }
