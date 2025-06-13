@@ -34,7 +34,7 @@ var bearController = new BearsController(coordinateSpace, bears);
 var timer = new System.Timers.Timer(1000); 
 timer.Elapsed += (sender, e) => bearController.RunOneIteration();
 timer.AutoReset = true; 
-timer.Start();
+// timer.Start();
 
 app.MapGet("/bears", () =>
 {
@@ -66,6 +66,12 @@ app.MapGet("/coordinatespace", () => new CoordinateSpaceData()
     TopLeft = [coordinateSpace.TopLeft.X, coordinateSpace.TopLeft.Y],
     Width = coordinateSpace.Width,
     Height = coordinateSpace.Height
+});
+
+app.MapPost("/start", () =>
+{
+    timer.Start();
+    return Results.Ok(new { message = "Timer started" });
 });
 
 app.Run();
