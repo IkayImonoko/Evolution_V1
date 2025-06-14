@@ -19,12 +19,14 @@ let webworkerCode = `
     `;
 
 async function init() {
+    document.getElementById("startButton").addEventListener('click', start);
     habitats = await getHabitatsFromApi();
     const coordinateSpace = await getCoordinateSpaceFromApi();
     const canvas = document.getElementById('myCanvas');
     canvas.width = coordinateSpace.width;
     canvas.height = coordinateSpace.height;
     initWebWorker(webworkerCode);
+    
 }
 async function initWebWorker(webworkerCode) {
     const blob = new Blob([webworkerCode], {type: 'application/javascript'});
@@ -57,3 +59,7 @@ function updateView(points) {
     }
 }
 
+async function start() {
+    console.log("starting...");
+    // await startSimulationTroughApi();
+}
