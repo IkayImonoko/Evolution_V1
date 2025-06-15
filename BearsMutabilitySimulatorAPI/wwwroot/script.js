@@ -20,6 +20,7 @@ let webworkerCode = `
 
 async function init() {
     document.getElementById("startButton").addEventListener('click', start);
+    document.getElementById("stopButton").addEventListener('click', stop);
     habitats = await getHabitatsFromApi();
     const coordinateSpace = await getCoordinateSpaceFromApi();
     const canvas = document.getElementById('myCanvas');
@@ -62,4 +63,8 @@ function updateView(points) {
 async function start() {
     console.log("starting...");
     // await startSimulationTroughApi();
+}
+
+async function start() {
+    console.log("stoping...");
 }
