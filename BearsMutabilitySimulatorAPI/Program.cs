@@ -74,4 +74,10 @@ app.MapPost("/start", () =>
     return Results.Ok(new { message = "Timer started" });
 });
 
+app.MapPost("/stop", () =>
+{
+    timer.Stop();
+    return Results.Ok(new { message = "Timer started" });
+});
+
 app.Run();

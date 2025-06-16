@@ -62,9 +62,10 @@ function updateView(points) {
 
 async function start() {
     console.log("starting...");
-    // await startSimulationTroughApi();
+    await startSimulationTroughApi();
 }
 
-async function start() {
+async function stop() {
     console.log("stoping...");
+    await stopSimulationTroughApi();
 }
