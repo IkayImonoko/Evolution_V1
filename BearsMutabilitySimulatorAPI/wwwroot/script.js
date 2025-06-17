@@ -19,8 +19,8 @@ let webworkerCode = `
     `;
 
 async function init() {
-    document.getElementById("startButton").addEventListener('click', start);
-    document.getElementById("stopButton").addEventListener('click', stop);
+    document.getElementById("startButton").addEventListener('click', await start);
+    document.getElementById("stopButton").addEventListener('click', await stop);
     habitats = await getHabitatsFromApi();
     const coordinateSpace = await getCoordinateSpaceFromApi();
     const canvas = document.getElementById('myCanvas');

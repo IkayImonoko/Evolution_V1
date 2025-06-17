@@ -1,16 +1,16 @@
 ﻿async function getHabitatsFromApi() {
-    const url = "/habitats";
+    const url = "http://localhost:5274/habitats";
     const response = await fetch(url);
     return await response.json();
 }
 async function getCoordinateSpaceFromApi() {
-    const url = "/coordinatespace";
+    const url = "http://localhost:5274/coordinatespace";
     const response = await fetch(url);
     return await response.json();
 }
 
 async function startSimulationTroughApi() {
-    const url = "/start";
+    const url = "http://localhost:5274/start";
     const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -30,4 +30,5 @@ async function stopSimulationTroughApi(){
         }
     });
 }
+
 

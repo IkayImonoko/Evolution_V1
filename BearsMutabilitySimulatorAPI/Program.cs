@@ -77,7 +77,7 @@ app.MapPost("/start", () =>
 app.MapPost("/stop", () =>
 {
     timer.Stop();
-    return Results.Ok(new { message = "Timer started" });
+    return Results.Ok(new { message = "Timer stoped" });
 });
 
 app.Run();
