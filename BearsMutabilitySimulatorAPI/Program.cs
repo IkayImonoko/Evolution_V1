@@ -16,8 +16,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-var bearsAmount = 50;
-var habitatLenght = 400;
+const int bearsAmount = 50;
+const int habitatLenght = 400;
 var coordinateSpace = new CoordinateSpace(new Point(0,0), habitatLenght * 2, habitatLenght * 2);
 
 Habitat[] habitats =
