@@ -16,10 +16,5 @@ public class Habitat
         TopLeft = topLeft;
         Length = length;
     }
-
-    // public void Draw(Mat mainField)
-    // {
-    //    var habitatPosition = new Rect(TopLeft.X, TopLeft.Y, Length, Length);
-    //    mainField[habitatPosition].SetTo(Color);
-    // }
+    
 }
