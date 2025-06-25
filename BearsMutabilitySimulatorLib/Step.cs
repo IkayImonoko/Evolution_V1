@@ -4,7 +4,7 @@ namespace BearsMutabilitySimulatorLib;
 
 public class Step
 {
-    public Point StartingPosition { get; private set; }
+    private Point StartingPosition { get;}
   
 
     public Step(Point startingPosition)
