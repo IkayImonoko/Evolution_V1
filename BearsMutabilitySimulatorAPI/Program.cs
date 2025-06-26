@@ -34,7 +34,6 @@ var bearController = new BearsController(coordinateSpace, bears);
 var timer = new System.Timers.Timer(1000); 
 timer.Elapsed += (sender, e) => bearController.RunOneIteration();
 timer.AutoReset = true; 
-// timer.Start();
 
 app.MapGet("/bears", () =>
 {
