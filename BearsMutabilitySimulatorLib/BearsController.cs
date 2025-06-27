@@ -38,8 +38,8 @@ public class BearsController
             bear.Lifetime--;
             Random random = new Random();
             Point newPosition;
-            int stepDirection = random.Next(0, 9);
-            int stepLength = random.Next(0, 9);
+            var stepDirection = random.Next(0, 9);
+            var stepLength = random.Next(0, 9);
             var step = new Step(bear.Position);
             newPosition = step.MakeStep((Direction)stepDirection, stepLength);
 
@@ -55,12 +55,12 @@ public class BearsController
     
     private void CheckCollisionsAndSpawnBears()
     {
-        for (int i = 0; i < _bears.Count - 1; i++)
+        for (var i = 0; i < _bears.Count - 1; i++)
         {
             for (int j = i + 1; j < _bears.Count; j++)
             {
-                Bear bear1 = _bears[i];
-                Bear bear2 = _bears[j];
+                var bear1 = _bears[i];
+                var bear2 = _bears[j];
                 var distance = GetDistanceBetweenBears(bear1, bear2);
                 if (distance < 6 && 
                     bear1.TimeToNextChildLeft == 0 && 
