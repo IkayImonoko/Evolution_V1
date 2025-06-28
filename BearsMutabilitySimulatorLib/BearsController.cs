@@ -36,7 +36,7 @@ public class BearsController
         if (bear.Lifetime > 0)
         {
             bear.Lifetime--;
-            Random random = new Random();
+            var random = new Random();
             Point newPosition;
             var stepDirection = random.Next(0, 9);
             var stepLength = random.Next(0, 9);
@@ -57,7 +57,7 @@ public class BearsController
     {
         for (var i = 0; i < _bears.Count - 1; i++)
         {
-            for (int j = i + 1; j < _bears.Count; j++)
+            for (var j = i + 1; j < _bears.Count; j++)
             {
                 var bear1 = _bears[i];
                 var bear2 = _bears[j];
