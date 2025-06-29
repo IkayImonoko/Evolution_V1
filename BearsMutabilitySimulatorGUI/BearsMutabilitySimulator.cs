@@ -7,8 +7,8 @@ public class BearsMutabilitySimulator
 {
     public void Run()
     {
-        int bearsAmount = 50;
-        int habitatLenght = 400;
+        var bearsAmount = 50;
+        var habitatLenght = 400;
         var coordinateSpace = new CoordinateSpace(new Point(0,0), habitatLenght * 2, habitatLenght * 2);
         Habitat[] habitats =
         [
@@ -17,12 +17,12 @@ public class BearsMutabilitySimulator
             new Habitat("Desert", Scalar.Yellow, new Point(0, habitatLenght),habitatLenght),
             new Habitat("Sea", Scalar.Blue, new Point(habitatLenght, habitatLenght),habitatLenght)
         ];
-        List<Bear> bears = new List<Bear>(bearsAmount);
+        var bears = new List<Bear>(bearsAmount);
         bears.AddRange(Enumerable.Range(0, bearsAmount).Select(_ => new Bear(coordinateSpace.BottomRight)));
         var bearController = new BearsController(coordinateSpace, bears);
         var simulationRender = new SimulationRender(coordinateSpace, bears, habitats);
         
-        int key = 0;
+        var key = 0;
         while (key != 27)
         {
             bearController.RunOneIteration();
