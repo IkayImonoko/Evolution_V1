@@ -32,11 +32,7 @@ public class Bear
     
 
 
-    // public void Draw(Mat mainField)
-    // {
-    //     mainField.Circle(Coordinates.X, Coordinates.Y, _radius, _color, -1);
-    //     mainField.Circle(Coordinates.X, Coordinates.Y, _radius, Scalar.Black, 1);
-    // }
+
 
    
     
