@@ -8,13 +8,7 @@ public class CoordinateSpace
     public int Width { get; }
     public int Height { get; }
 
-    public Point BottomRight
-    {
-        get
-        {
-            return new Point(TopLeft.X + Width - 1, TopLeft.Y + Height - 1);
-        }
-    }
+    public Point BottomRight => new(TopLeft.X + Width - 1, TopLeft.Y + Height - 1);
 
     public CoordinateSpace(Point topLeft, int width, int height)
     {
