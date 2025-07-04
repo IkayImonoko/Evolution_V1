@@ -21,7 +21,7 @@ public class BearsMutabilitySimulator
         bears.AddRange(Enumerable.Range(0, bearsAmount).Select(_ => new Bear(coordinateSpace.BottomRight)));
         var bearController = new BearsController(coordinateSpace, bears);
         var simulationRender = new SimulationRender(coordinateSpace, bears, habitats);
-        
+
         var key = 0;
         while (key != 27)
         {
