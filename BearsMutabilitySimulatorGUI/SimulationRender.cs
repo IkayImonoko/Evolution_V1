@@ -6,7 +6,7 @@ namespace BearsMutabilitySimulatorGUI;
 
 public class SimulationRender
 {
-    private Mat _mainField;
+    private readonly Mat _mainField;
     private readonly List<Bear> _bears;
     private readonly Habitat[] _habitats;
 
