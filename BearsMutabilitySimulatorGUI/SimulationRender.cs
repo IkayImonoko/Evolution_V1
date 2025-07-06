@@ -19,7 +19,7 @@ public class SimulationRender
     }
     public void Render()
     {
-        foreach (Habitat habitat in _habitats)
+        foreach (var habitat in _habitats)
         {
             var habitatPosition = new Rect(habitat.TopLeft.X, habitat.TopLeft.Y, habitat.Length, habitat.Length);
             _mainField[habitatPosition].SetTo(habitat.Color);
