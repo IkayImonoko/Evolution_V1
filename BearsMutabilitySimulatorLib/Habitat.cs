@@ -4,9 +4,9 @@ namespace BearsMutabilitySimulatorLib;
 
 public class Habitat
 {
-    public int Length;
+    public readonly int Length;
     public Point TopLeft;
-    public string Name;
+    public readonly string Name;
     public Scalar Color;
 
     public Habitat(string name, Scalar color, Point topLeft, int length)
