@@ -14,40 +14,20 @@ public class Step
 
     public Point MakeStep(Direction direction, int stepLength)
     {
-        Point newPosition = default;
-        switch (direction)
+        Point newPosition = direction switch
         {
-            case Direction.Center:
-                newPosition = StartingPosition;
-                break;
-            case Direction.TopLeft:
-                newPosition = new Point(StartingPosition.X - stepLength, StartingPosition.Y - stepLength);
-                break;
-            case Direction.TopMiddle:
-                newPosition = new Point(StartingPosition.X, StartingPosition.Y - stepLength);
-                break;
-            case Direction.TopRight:
-                newPosition = new Point(StartingPosition.X + stepLength, StartingPosition.Y - stepLength);
-                break;
-            case Direction.Left:
-                newPosition = new Point(StartingPosition.X - stepLength, StartingPosition.Y);
-                break;
-            case Direction.Right:
-                newPosition = new Point(StartingPosition.X + stepLength, StartingPosition.Y);
-                break;
-            case Direction.BottomLeft:
-                newPosition = new Point(StartingPosition.X - stepLength, StartingPosition.Y + stepLength);
-                break;
-            case Direction.BottomMiddle:
-                newPosition = new Point(StartingPosition.X, StartingPosition.Y + stepLength);
-                break;
-            case Direction.BottomRight:
-                newPosition = new Point(StartingPosition.X + stepLength, StartingPosition.Y + stepLength);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
-        }
-        
+            Direction.Center => StartingPosition,
+            Direction.TopLeft => new Point(StartingPosition.X - stepLength, StartingPosition.Y - stepLength),
+            Direction.TopMiddle => new Point(StartingPosition.X, StartingPosition.Y - stepLength),
+            Direction.TopRight => new Point(StartingPosition.X + stepLength, StartingPosition.Y - stepLength),
+            Direction.Left => new Point(StartingPosition.X - stepLength, StartingPosition.Y),
+            Direction.Right => new Point(StartingPosition.X + stepLength, StartingPosition.Y),
+            Direction.BottomLeft => new Point(StartingPosition.X - stepLength, StartingPosition.Y + stepLength),
+            Direction.BottomMiddle => new Point(StartingPosition.X, StartingPosition.Y + stepLength),
+            Direction.BottomRight => new Point(StartingPosition.X + stepLength, StartingPosition.Y + stepLength),
+            _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
+        };
+
         return newPosition;
     }
 }
