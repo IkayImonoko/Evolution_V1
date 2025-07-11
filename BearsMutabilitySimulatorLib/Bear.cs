@@ -13,7 +13,7 @@ public class Bear
     public Bear(Point maximumAllowablePosition, Scalar colorA = default, Scalar colorB = default)
     {
         MaximumAllowablePosition = maximumAllowablePosition;
-        Random random = new Random();
+        var random = new Random();
         TimeToNextChildLeft = 730;
         Lifetime = random.Next(365 * 5, 365 * 10);
         var mutation = random.Next(1, 11);
