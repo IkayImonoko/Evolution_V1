@@ -37,11 +37,10 @@ public class BearsController
         {
             bear.Lifetime--;
             var random = new Random();
-            Point newPosition;
             var stepDirection = random.Next(0, 9);
             var stepLength = random.Next(0, 9);
             var step = new Step(bear.Position);
-            newPosition = step.MakeStep((Direction)stepDirection, stepLength);
+            var newPosition = step.MakeStep((Direction)stepDirection, stepLength);
 
             while (!_coordinateSpace.CanMoveTo(newPosition))
             {
