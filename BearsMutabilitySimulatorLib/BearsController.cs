@@ -33,23 +33,22 @@ public class BearsController
         {
             bear.TimeToNextChildLeft--;
         }
-        if (bear.Lifetime > 0)
-        {
-            bear.Lifetime--;
-            var random = new Random();
-            var stepDirection = random.Next(0, 9);
-            var stepLength = random.Next(0, 9);
-            var step = new Step(bear.Position);
-            var newPosition = step.MakeStep((Direction)stepDirection, stepLength);
 
-            while (!_coordinateSpace.CanMoveTo(newPosition))
-            {
-                stepDirection = random.Next(0, 9);
-                newPosition = step.MakeStep((Direction)stepDirection, stepLength);
-            }
-            
-            bear.Position = newPosition;
+        if (bear.Lifetime <= 0) return;
+        bear.Lifetime--;
+        var random = new Random();
+        var stepDirection = random.Next(0, 9);
+        var stepLength = random.Next(0, 9);
+        var step = new Step(bear.Position);
+        var newPosition = step.MakeStep((Direction)stepDirection, stepLength);
+
+        while (!_coordinateSpace.CanMoveTo(newPosition))
+        {
+            stepDirection = random.Next(0, 9);
+            newPosition = step.MakeStep((Direction)stepDirection, stepLength);
         }
+            
+        bear.Position = newPosition;
     }
     
     private void CheckCollisionsAndSpawnBears()
