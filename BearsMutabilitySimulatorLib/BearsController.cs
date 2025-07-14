@@ -60,19 +60,15 @@ public class BearsController
                 var bear1 = _bears[i];
                 var bear2 = _bears[j];
                 var distance = GetDistanceBetweenBears(bear1, bear2);
-                if (distance < 6 && 
-                    bear1.TimeToNextChildLeft == 0 && 
-                    bear2.TimeToNextChildLeft == 0)
+                if (!(distance < 6) ||
+                    bear1.TimeToNextChildLeft != 0 ||
+                    bear2.TimeToNextChildLeft != 0) continue;
+                var newBear = MakeChild(bear1, bear2);
+                if (newBear != null)
                 {
-
-                    var newBear = MakeChild(bear1, bear2);
-                    if (newBear != null)
-                    {
-                        _bears.Add(newBear); 
-                    }
-                    break;
-                   
+                    _bears.Add(newBear); 
                 }
+                break;
             }
         }
     }
