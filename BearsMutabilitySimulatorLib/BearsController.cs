@@ -73,7 +73,7 @@ public class BearsController
         }
     }
     
-    private double GetDistanceBetweenBears(Bear bear1, Bear bear2)
+    private static double GetDistanceBetweenBears(Bear bear1, Bear bear2)
     {
         double deltaX = bear1.Position.X - bear2.Position.X;
         double deltaY = bear1.Position.Y - bear2.Position.Y;
@@ -84,7 +84,7 @@ public class BearsController
     public void RunOneIteration()
     {
         _bears.RemoveAll(b => b.Lifetime == 0);
-        _bears.ForEach(b => Move(b));
+        _bears.ForEach(Move);
         CheckCollisionsAndSpawnBears();
     }
     
