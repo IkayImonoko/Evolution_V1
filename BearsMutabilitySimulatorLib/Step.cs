@@ -2,15 +2,10 @@
 
 namespace BearsMutabilitySimulatorLib;
 
-public class Step
+public class Step(Point startingPosition)
 {
-    private Point StartingPosition { get;}
-  
+    private Point StartingPosition { get;} = startingPosition;
 
-    public Step(Point startingPosition)
-    {
-        StartingPosition = startingPosition;
-    }
 
     public Point MakeStep(Direction direction, int stepLength)
     {
