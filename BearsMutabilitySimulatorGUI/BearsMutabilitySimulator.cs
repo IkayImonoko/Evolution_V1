@@ -3,7 +3,7 @@ using OpenCvSharp;
 
 namespace BearsMutabilitySimulatorGUI;
 
-public class BearsMutabilitySimulator
+public static class BearsMutabilitySimulator
 {
     public static void Run()
     {
