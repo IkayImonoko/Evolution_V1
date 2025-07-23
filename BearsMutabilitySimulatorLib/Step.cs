@@ -9,7 +9,7 @@ public class Step(Point startingPosition)
 
     public Point MakeStep(Direction direction, int stepLength)
     {
-        Point newPosition = direction switch
+        var newPosition = direction switch
         {
             Direction.Center => StartingPosition,
             Direction.TopLeft => new Point(StartingPosition.X - stepLength, StartingPosition.Y - stepLength),
