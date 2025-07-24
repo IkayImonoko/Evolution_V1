@@ -7,7 +7,7 @@ public static class BearsMutabilitySimulator
 {
     public static void Run()
     {
-        const int bearsAmount = 50;
+        const int bearsAmount = 100;
         const int habitatLenght = 400;
         var coordinateSpace = new CoordinateSpace(new Point(0,0), habitatLenght * 2, habitatLenght * 2);
         Habitat[] habitats =
